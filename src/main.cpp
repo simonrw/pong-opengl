@@ -34,6 +34,12 @@ GLenum glCheckError_(const char *file, int line)
 
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode);
 
+void update(GLuint dt_ms) {
+}
+
+void draw() {
+}
+
 int main() {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -42,7 +48,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "PONG!!!", nullptr, nullptr);
     if (window == nullptr) {
         cerr << "Failed to create GLFW window\n";
         glfwTerminate();
@@ -64,11 +70,17 @@ int main() {
     glfwSetKeyCallback(window, key_callback);
 
 
+    GLfloat currentTime = 0.0;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         GLfloat timeValue = glfwGetTime();
+        GLuint dt = (timeValue - currentTime) * 1000;
+
+        update(dt);
+        draw();
 
         glfwSwapBuffers(window);
+        currentTime = timeValue;
     }
 
     glfwTerminate();
