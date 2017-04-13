@@ -4,7 +4,10 @@ project(pong)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
-add_executable(pong src/main.cpp)
+include_directories(include)
+
+add_executable(pong src/main.cpp src/objparser.cpp src/shaders.cpp
+    src/glerrors.cpp)
 
 target_link_libraries(pong glew glfw /System/Library/Frameworks/OpenGL.framework)
 
